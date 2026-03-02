@@ -1,0 +1,4 @@
+baseURL = 'https://zelany1101.github.io'
+languageCode = 'en-us'
+title = 'My New Hugo Project'
+theme =  "blowfish"
