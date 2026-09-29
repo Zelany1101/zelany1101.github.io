@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ribbit</title>
+<link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--paper:#fff;--dot:#0002;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#fff;--paper:#000;--dot:#fff3}}
+:root[data-theme="dark"]{--ink:#fff;--paper:#000;--dot:#fff3}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+body{background:var(--paper);color:var(--ink);font-family:"Gochi Hand","Comic Sans MS","Chalkboard SE",cursive;
+background-image:radial-gradient(var(--dot) 1.5px,transparent 1.5px);background-size:22px 22px;overflow:hidden}
+svg{overflow:visible}
+.ink{fill:var(--paper);stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.solid{fill:var(--ink);stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+.line{fill:none;stroke:var(--ink);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.wob{filter:url(#rough)}
+
+/* loader */
+#loader{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;background:var(--paper);z-index:5;transition:opacity .4s,visibility .4s;padding:1rem}
+#loader.done{opacity:0;visibility:hidden}
+.track{position:relative;width:min(80vw,460px);height:34px;border:4px solid var(--ink);border-radius:20px;box-shadow:6px 6px 0 var(--ink);background:var(--paper);filter:url(#rough)}
+.fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:14px;
+background:repeating-linear-gradient(-45deg,var(--ink) 0 5px,var(--paper) 5px 10px)}
+.hopper{position:absolute;bottom:100%;left:0;width:64px;margin:0 0 -4px -32px;transform:translateX(0)}
+.hopper svg{width:100%;height:auto;animation:hop .32s ease-in-out infinite alternate}
+@keyframes hop{to{transform:translateY(-14px) rotate(-6deg)}}
+#pct{font-size:1.6rem}
+
+/* home */
+main{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(1rem,4vh,2.2rem);padding:1.5rem;text-align:center;opacity:0;visibility:hidden}
+main.show{visibility:visible;opacity:1}
+.logo{width:clamp(140px,34vmin,260px)}
+.logo svg{width:100%;height:auto}
+main.show .logo{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:translateY(60px) scale(.6)}60%{transform:translateY(-16px) scale(1.05)}100%{transform:none}}
+h1{margin:0;font-weight:400;font-size:clamp(2rem,7vmin,3.4rem);letter-spacing:.02em}
+nav{display:flex;flex-direction:column;gap:clamp(.8rem,2.5vh,1.3rem);width:min(86vw,340px)}
+@media (min-width:760px) and (min-height:560px){nav{flex-direction:row;width:auto;gap:1.6rem}}
+nav a{display:block;padding:.55em 1.4em;font-size:clamp(1.5rem,4.5vmin,2rem);color:var(--ink);background:var(--paper);text-decoration:none;
+border:4px solid var(--ink);border-radius:18px 24px 16px 26px / 24px 16px 26px 18px;box-shadow:6px 6px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+nav a:nth-child(2){transform:rotate(-1.5deg)}
+nav a:nth-child(3){transform:rotate(1.2deg)}
+nav a:hover,nav a:focus-visible{transform:translate(4px,4px) rotate(0);box-shadow:2px 2px 0 var(--ink);background:var(--ink);color:var(--paper);outline:none}
+nav a:focus-visible{outline:3px dashed var(--ink);outline-offset:5px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<style>
+body{overflow:auto}
+.wrap{max-width:680px;margin:0 auto;padding:1.5rem;display:flex;flex-direction:column;gap:1.4rem}
+.top{display:flex;align-items:center;gap:1rem}
+.top a{width:70px;display:block}.top svg{width:100%;height:auto}
+.card{border:4px solid var(--ink);border-radius:18px 24px 16px 26px / 24px 16px 26px 18px;box-shadow:6px 6px 0 var(--ink);padding:1rem 1.2rem;background:var(--paper)}
+.card h2{margin:0;font-weight:400;font-size:1.7rem}.card small{font-size:1.1rem;opacity:.7}.card p{margin:.4rem 0 0;font-size:1.25rem;line-height:1.35}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.5"/></filter>
+<symbol id="frog" viewBox="-8 -8 136 116">
+ <g class="wob">
+  <path class="ink" d="M22 78 q-16 4 -14 16 q14 4 26 -4 M98 78 q16 4 14 16 q-14 4 -26 -4"/>
+  <path class="ink" d="M60 26 C26 24 8 50 12 76 C16 98 40 100 60 100 C80 100 104 98 108 76 C112 50 94 24 60 26Z"/>
+  <circle class="ink" cx="36" cy="26" r="17"/><circle class="ink" cx="84" cy="26" r="17"/>
+  <circle class="solid" cx="38" cy="27" r="6"/><circle class="solid" cx="82" cy="27" r="6"/>
+  <circle cx="40" cy="24" r="2" fill="var(--paper)"/><circle cx="84" cy="24" r="2" fill="var(--paper)"/>
+  <path class="line" d="M42 62 q18 16 36 0"/>
+  <path class="line" d="M26 58 l-6 -2 M28 66 l-7 1 M94 58 l6 -2 M92 66 l7 1"/>
+  <circle class="solid" cx="54" cy="46" r="1.5"/><circle class="solid" cx="66" cy="46" r="1.5"/>
+  <path class="line" d="M30 84 q6 6 12 0 M78 84 q6 6 12 0" stroke-width="3"/>
+ </g>
+</symbol>
+</svg>
+<div class="wrap">
+  <div class="top"><a href="./" aria-label="Home"><svg viewBox="-8 -8 136 116"><use href="#frog"/></svg></a><h1 id="t">...</h1></div>
+  <div id="list"></div>
+</div>
+<script>
+fetch('data/blog.json').then(r => r.json()).then(d => {
+  document.getElementById('t').textContent = d.title;
+  document.title = d.title + ' | Ribbit';
+  const list = document.getElementById('list');
+  d.items.forEach(i => {
+    const c = document.createElement('div'); c.className = 'card'; c.style.marginBottom = '1.2rem';
+    ['h2:heading', 'small:meta', 'p:text'].forEach(s => {
+      const [tag, k] = s.split(':'); if (!i[k]) return;
+      const e = document.createElement(tag); e.textContent = i[k]; c.appendChild(e);
+    });
+    list.appendChild(c);
+  });
+}).catch(() => { document.getElementById('t').textContent = 'Oops, try again'; });
+</script></body></html>
