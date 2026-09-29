@@ -47,9 +47,9 @@ nav a:nth-child(2){transform:rotate(-1.5deg)}
 nav a:nth-child(3){transform:rotate(1.2deg)}
 nav a:hover,nav a:focus-visible{transform:translate(4px,4px) rotate(0);box-shadow:2px 2px 0 var(--ink);background:var(--ink);color:var(--paper);outline:none}
 nav a:focus-visible{outline:3px dashed var(--ink);outline-offset:5px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* reduced-motion: keep the loader and hop, only calm the big bounce */
+@media (prefers-reduced-motion:reduce){main.show .logo{animation:none}.hopper svg{animation-duration:.8s}}
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.5"/></filter>
